@@ -36,6 +36,17 @@ class Api::V1::UsersController < ApplicationController
             render json: {error: "User not found"}
         end
     end
+
+    def show_user_lists
+        @user = get_current_user
+        @user_lists = List.all.select{|list| list.user_id === @user.id }
+        # byebug
+        if @user_lists
+            render json: @user_lists
+        else
+            render json: {error: "User not found"}
+        end
+    end
  
   private
  

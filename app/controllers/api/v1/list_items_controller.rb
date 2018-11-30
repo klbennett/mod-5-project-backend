@@ -12,6 +12,9 @@ class Api::V1::ListItemsController < ApplicationController
       end
   end
 
-  def delete
-  end
+  def destroy
+    @list_item = ListItem.find(params[:id])
+    @list_item.destroy
+    end
+
 end

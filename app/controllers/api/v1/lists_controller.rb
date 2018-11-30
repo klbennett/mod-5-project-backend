@@ -18,5 +18,12 @@ class Api::V1::ListsController < ApplicationController
             render json: {error: "List not found"}
         end
     end
+
+     def destroy
+        @list = List.find(params[:id])
+        @list_items = ListItem.all.select{|list_item| list_item.list_id === @list.id}
+        @list_items.map{|li| li.destroy}
+        @list.destroy
+    end
  
 end

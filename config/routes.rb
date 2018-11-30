@@ -10,14 +10,17 @@ Rails.application.routes.draw do
       post 'login', to: 'users#login'
       post 'signup', to: 'users#signup'
       get 'user/:id', to: 'users#show'
+      get 'userlists', to: 'users#show_user_lists'
       
       resources :lists
       post 'createlist', to: 'lists#create'
       get 'list/:id', to: 'lists#show'
-      # post 'list/:id', to: 'lists#create'
+      post 'list/:id', to: 'lists#create'
+      delete 'list/:id', to: 'lists#destroy'
 
       resources :list_items
       post 'createlistitem', to: 'list_items#create'
+      delete 'listitem/:id', to: 'list_items#destroy'
 
     end
   end
