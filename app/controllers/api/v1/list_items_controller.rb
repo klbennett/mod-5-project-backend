@@ -1,5 +1,12 @@
 class Api::V1::ListItemsController < ApplicationController
+
   def show
+     @list_item = ListItem.find_by(id: params[:id])
+        if @list_item 
+            render json: @list_item
+        else
+            render json: {error: "List Item not found"}, status: 500
+        end
   end
 
   def create
@@ -12,9 +19,13 @@ class Api::V1::ListItemsController < ApplicationController
       end
   end
 
-  def destroy
-    @list_item = ListItem.find(params[:id])
-    @list_item.destroy
+    def destroy
+        @list_item = ListItem.find(params[:id])
+        @user = User.all.find{|user| user.id === @list_item.list.user_id}
+        # byebug
+        @user_lists = @user.lists
+        @list_item.destroy
+        render json: @user_lists
     end
 
 end

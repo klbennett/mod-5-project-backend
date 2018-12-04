@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
       resources :list_items
       post 'createlistitem', to: 'list_items#create'
+      get 'listitem/:id', to: 'list_items#show'
       delete 'listitem/:id', to: 'list_items#destroy'
 
     end

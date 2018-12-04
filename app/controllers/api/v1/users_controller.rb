@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
         if @user && @user.authenticate(params[:password])
             render json: { token: issue_token({id: @user.id})}
         else
-            render json: {error: "Could not log in"}
+            render json: {error: "Could not log in"}, status: 400
         end
     end
 
